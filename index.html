@@ -17,13 +17,20 @@
       padding: 20px;
       background: white;
       border-radius: 10px;
-      width: 80%;
+      width: 60%;
+      font-size: 24px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       position: relative;
       z-index: 2;
     }
     .question.active {
       display: block;
+    }
+    .options {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
     }
     button {
       margin: 10px;
@@ -33,14 +40,14 @@
       background: #ff4d6d;
       color: white;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 24px;
       transition: all 0.3s ease;
     }
     button:hover {
       background: #e63950;
     }
     .correct {
-      background: #4CAF50 !important; /* Green */
+      background: #4CAF50 !important;
     }
     .final-message {
       font-size: 24px;
@@ -68,31 +75,40 @@
 <body>
   <h1>💖 Will You Be My Valentine? 💖</h1>
 
-  <!-- Background music autoplay -->
-  <audio id="bgMusic" autoplay loop>
+  <!-- Volume button to play music -->
+  <button onclick="toggleMusic()">🎶 Play Music</button>
+
+  <!-- Background music -->
+  <audio id="bgMusic" loop>
     <source src="romantic.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
   <div id="q1" class="question active">
-    <p>1. What’s my favorite color?</p>
-    <button onclick="checkAnswer(this, false, 'q1', 'q2')">Blue</button>
-    <button onclick="checkAnswer(this, false, 'q1', 'q2')">Green</button>
-    <button onclick="checkAnswer(this, true, 'q1', 'q2')">Red</button>
+    <p>1. What’s my frist gift to you on our First Date?</p>
+    <div class="options">
+      <button onclick="checkAnswer(this, false, 'q1', 'q2')">🧸 Teddy Bear </button>
+      <button onclick="checkAnswer(this, false, 'q1', 'q2')">💌 A handwritten love letter</button>
+      <button onclick="checkAnswer(this, true, 'q1', 'q2')">KitKat and Roses 🍫🌹</button>
+    </div>
   </div>
 
   <div id="q2" class="question">
     <p>2. Where did we go on our very first date?</p>
-    <button onclick="checkAnswer(this, false, 'q2', 'q3')">🎬 Movie night at the theater</button>
-    <button onclick="checkAnswer(this, false, 'q2', 'q3')">☕ Coffee shop hangout</button>
-    <button onclick="checkAnswer(this, true, 'q2', 'q3')">🕯️🍽️ Candle light dinner date</button>
+      <div class="options">
+        <button onclick="checkAnswer(this, false, 'q2', 'q3')">🎬 Movie night at the theater</button>
+        <button onclick="checkAnswer(this, false, 'q2', 'q3')">☕ Coffee shop hangout</button>
+        <button onclick="checkAnswer(this, true, 'q2', 'q3')">🕯️🍽️ Candle light dinner date</button>
+      </div>
   </div>
 
   <div id="q3" class="question">
     <p>3. Which flower do I always get you?</p>
-    <button onclick="checkAnswer(this, false, 'q3', 'q4')">Tulip</button>
-    <button onclick="checkAnswer(this, true, 'q3', 'q4')">Rose</button>
-    <button onclick="checkAnswer(this, false, 'q3', 'q4')">Lily</button>
+    <div class="options">
+      <button onclick="checkAnswer(this, false, 'q3', 'q4')">Tulip</button>
+      <button onclick="checkAnswer(this, true, 'q3', 'q4')">Rose</button>
+      <button onclick="checkAnswer(this, false, 'q3', 'q4')">Lily</button>
+    </div>
   </div>
 
   <div id="q4" class="question">
@@ -191,6 +207,16 @@
       setTimeout(() => heart.remove(), 6000);
     }
     setInterval(createHeart, 500);
+
+    // Toggle music on button click
+    function toggleMusic() {
+      const bgMusic = document.getElementById("bgMusic");
+      if (bgMusic.paused) {
+        bgMusic.play();
+      } else {
+        bgMusic.pause();
+      }
+    }
   </script>
 </body>
 </html>
