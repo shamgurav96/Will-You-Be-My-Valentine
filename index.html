@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Quiz 💘</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: pink;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+    }
+    .question {
+      display: none;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      width: 80%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+    .question.active {
+      display: block;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #e63950;
+    }
+    .correct {
+      background: #4CAF50 !important; /* Green */
+    }
+    .final-message {
+      font-size: 24px;
+      font-weight: bold;
+      color: red;
+      margin-top: 30px;
+      z-index: 3;
+      position: relative;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: floatUp 6s linear forwards;
+      opacity: 0.8;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Will You Be My Valentine? 💖</h1>
+
+  <!-- Background music autoplay -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="q1" class="question active">
+    <p>1. What’s my favorite color?</p>
+    <button onclick="checkAnswer(this, false, 'q1', 'q2')">Blue</button>
+    <button onclick="checkAnswer(this, false, 'q1', 'q2')">Green</button>
+    <button onclick="checkAnswer(this, true, 'q1', 'q2')">Red</button>
+  </div>
+
+  <div id="q2" class="question">
+    <p>2. Where did we go on our very first date?</p>
+    <button onclick="checkAnswer(this, false, 'q2', 'q3')">🎬 Movie night at the theater</button>
+    <button onclick="checkAnswer(this, false, 'q2', 'q3')">☕ Coffee shop hangout</button>
+    <button onclick="checkAnswer(this, true, 'q2', 'q3')">🕯️🍽️ Candle light dinner date</button>
+  </div>
+
+  <div id="q3" class="question">
+    <p>3. Which flower do I always get you?</p>
+    <button onclick="checkAnswer(this, false, 'q3', 'q4')">Tulip</button>
+    <button onclick="checkAnswer(this, true, 'q3', 'q4')">Rose</button>
+    <button onclick="checkAnswer(this, false, 'q3', 'q4')">Lily</button>
+  </div>
+
+  <div id="q4" class="question">
+    <p>4. Will you be my Valentine? 💘</p>
+    <button id="yesBtn" onclick="finalAnswer(true)">Yes!</button>
+    <button id="noBtn" onclick="handleNo()">No 😢</button>
+  </div>
+
+  <div id="final" class="final-message"></div>
+
+  <script>
+    function checkAnswer(button, isCorrect, currentQ, nextQ) {
+      const current = document.getElementById(currentQ);
+      const next = document.getElementById(nextQ);
+
+      if (isCorrect) {
+        // Highlight the selected button in green
+        button.classList.add("correct");
+        // Wait 1 second, then move to next question
+        setTimeout(() => {
+          button.classList.remove("correct");
+          current.classList.remove('active');
+          next.classList.add('active');
+        }, 1000);
+      } else {
+        // Highlight the correct option if wrong answer chosen
+        const buttons = current.getElementsByTagName('button');
+        for (let btn of buttons) {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        }
+      }
+    }
+
+    function finalAnswer(isYes) {
+      const finalDiv = document.getElementById('final');
+      document.getElementById('q4').classList.remove('active');
+      if (isYes) {
+        finalDiv.innerHTML = "Yay! 💖 I’m so lucky to have you!";
+        burstHearts();
+      } else {
+        finalDiv.innerHTML = "Oh no 😢 But I’ll always love you!";
+      }
+    }
+
+    let noClickCount = 0;
+    const cuteQuestions = [
+      "Are you sure?",
+      "Really sure? 🥺",
+      "Think again... 💕",
+      "Come on, say Yes 😘",
+      "You know you want to 💖"
+    ];
+
+    function handleNo() {
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+
+      if (noClickCount < cuteQuestions.length) {
+        noBtn.innerText = cuteQuestions[noClickCount];
+        noClickCount++;
+        let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+        yesBtn.style.fontSize = (currentSize + 4) + "px";
+        yesBtn.style.padding = "12px 24px";
+      } else {
+        yesBtn.style.fontSize = "40px";
+        yesBtn.style.background = "#4CAF50";
+        yesBtn.innerText = "Say YES 💘";
+      }
+    }
+
+    function createHeartBurst() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(createHeartBurst, i * 100);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
