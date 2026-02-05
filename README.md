@@ -5,6 +5,12 @@ Designed for asking your girlfriend to be your Valentine in a playful and engagi
 
 ---
 
+## 🌐 Live Demo
+
+you can access the quiz here: 👉 [Will You Be My Valentine Quiz](https://shamgurav96.io/Will-You-Be-My-Valentine/)
+
+---
+
 ## ✨ Features
 - **Four quiz questions**: Each question unlocks the next only if the correct answer is chosen.
 - **Correct answer effect**: The selected button turns green for 1 second before moving to the next question.
@@ -38,9 +44,3 @@ Designed for asking your girlfriend to be your Valentine in a playful and engagi
    <audio id="bgMusic" autoplay loop>
      <source src="romantic.mp3" type="audio/mpeg">
    </audio>
-
-## 🌐 Live Demo
-
-you can access the quiz here:
-
-👉 `https://shamgurav96.io/Will-You-Be-My-Valentine/`
