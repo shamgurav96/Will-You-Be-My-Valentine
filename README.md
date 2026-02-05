@@ -7,7 +7,7 @@ Designed for asking your girlfriend to be your Valentine in a playful and engagi
 
 ## 🌐 Live Demo
 
-you can access the quiz here: 👉 [Will You Be My Valentine Quiz](https://shamgurav96.io/Will-You-Be-My-Valentine/)
+you can access the quiz here: 👉 [Will You Be My Valentine Quiz](https://shamgurav96.github.io/Will-You-Be-My-Valentine/)
 
 ---
 
